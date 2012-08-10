@@ -43,25 +43,25 @@ describe SingleCharacterMatcher do
 
 end
 
-# describe CharacterSequenceMatcher do
+describe CharacterSequenceMatcher do
 
-#   it "should match cases with a sequence of similar characters" do
-#     CharacterSequenceMatcher.check("foo").should be_true
-#     CharacterSequenceMatcher.check("faab").should be_true
-#     CharacterSequenceMatcher.check("1 33 2").should be_true
-#     CharacterSequenceMatcher.check("AABBCC").should be_true
-#     CharacterSequenceMatcher.check("ññ").should be_true
-#   end
+  it "should match cases with a sequence of similar characters" do
+    CharacterSequenceMatcher.check("foo").should be_true
+    CharacterSequenceMatcher.check("faab").should be_true
+    CharacterSequenceMatcher.check("1 33 2").should be_true
+    CharacterSequenceMatcher.check("AABBCC").should be_true
+    CharacterSequenceMatcher.check("ññ").should be_true
+  end
 
-#   it "should not match cases without sequences of similar characters" do
-#     CharacterSequenceMatcher.check("abc").should be_false
-#     CharacterSequenceMatcher.check("aAbBcC").should be_false
-#     CharacterSequenceMatcher.check(" a ").should be_false
-#     CharacterSequenceMatcher.check("  ").should be_false
-#     CharacterSequenceMatcher.check("'`").should be_false
-#   end
+  it "should not match cases without sequences of similar characters" do
+    CharacterSequenceMatcher.check("abc").should be_false
+    CharacterSequenceMatcher.check("aAbBcC").should be_false
+    CharacterSequenceMatcher.check(" a ").should be_false
+    CharacterSequenceMatcher.check("  ").should be_false
+    CharacterSequenceMatcher.check("'`").should be_false
+  end
 
-# end
+end
 
 describe VowlerPairMatcher do
 
