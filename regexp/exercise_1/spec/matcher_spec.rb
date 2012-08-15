@@ -9,6 +9,7 @@ describe SingleCharacterMatcher do
     SingleCharacterMatcher.check("1").should be_true
     SingleCharacterMatcher.check("A").should be_true
     SingleCharacterMatcher.check("ñ").should be_true
+    SingleCharacterMatcher.check("ñ").should be_true
   end
 
   it "should not match cases without single characters" do
@@ -23,46 +24,60 @@ describe SingleCharacterMatcher do
     SingleCharacterMatcher.contains?('a', 'aabc').should be_false
     SingleCharacterMatcher.contains?('1', '1234').should be_true
     SingleCharacterMatcher.contains?('a', 'abac').should be_false
+    SingleCharacterMatcher.contains?('a', '').should be_false
+  end
+
+  it "should find if the string I pass contains only the character I specify" do
+    SingleCharacterMatcher.contains_only_this_character?('a', 'aaa').should be_true
+    SingleCharacterMatcher.contains_only_this_character?('1', '111').should be_true
+    SingleCharacterMatcher.contains_only_this_character?('a', 'aba').should be_false
+    SingleCharacterMatcher.contains_only_this_character?('1', '2212').should be_false
+  end
+
+  it "should find if the string I pass contains none of the characters I pass" do
+    SingleCharacterMatcher.does_not_only_contain_this_character?('a', 'aaa').should be_false
+    SingleCharacterMatcher.does_not_only_contain_this_character?('a', 'bba').should be_false
+    SingleCharacterMatcher.does_not_only_contain_this_character?('a', 'bcc').should be_true
+    SingleCharacterMatcher.does_not_only_contain_this_character?('a', '123').should be_true
   end
 
 end
 
-describe CharacterSequenceMatcher do
+# describe CharacterSequenceMatcher do
 
-  it "should match cases with a sequence of similar characters" do
-    CharacterSequenceMatcher.check("foo").should be_true
-    CharacterSequenceMatcher.check("faab").should be_true
-    CharacterSequenceMatcher.check("1 33 2").should be_true
-    CharacterSequenceMatcher.check("AABBCC").should be_true
-    CharacterSequenceMatcher.check("ññ").should be_true
-  end
+#   it "should match cases with a sequence of similar characters" do
+#     CharacterSequenceMatcher.check("foo").should be_true
+#     CharacterSequenceMatcher.check("faab").should be_true
+#     CharacterSequenceMatcher.check("1 33 2").should be_true
+#     CharacterSequenceMatcher.check("AABBCC").should be_true
+#     CharacterSequenceMatcher.check("ññ").should be_true
+#   end
 
-  it "should not match cases without sequences of similar characters" do
-    CharacterSequenceMatcher.check("abc").should be_false
-    CharacterSequenceMatcher.check("aAbBcC").should be_false
-    CharacterSequenceMatcher.check(" a ").should be_false
-    CharacterSequenceMatcher.check("  ").should be_false
-    CharacterSequenceMatcher.check("'`").should be_false
-  end
+#   it "should not match cases without sequences of similar characters" do
+#     CharacterSequenceMatcher.check("abc").should be_false
+#     CharacterSequenceMatcher.check("aAbBcC").should be_false
+#     CharacterSequenceMatcher.check(" a ").should be_false
+#     CharacterSequenceMatcher.check("  ").should be_false
+#     CharacterSequenceMatcher.check("'`").should be_false
+#   end
 
-end
+# end
 
-=begin
 describe VowlerPairMatcher do
 
   it "it should find two vowels following each other" do
-    VowlerPairMatcher.check("qwrtp").shoulde be_false
-    VowlerPairMatcher.check("qwer").should be_false
-    VowlerPairMatcher.check("qweer").should be_true
-    VowlerPairMatcher.check("qwe.rr").should be_false
-    VowlerPairMatcher.check("aas").should be_true
-    VowlerPairMatcher.check("the\ngray\nass").should be_false
-    VowlerPairMatcher.check("zo\noey").should be_true
-    VowlerPairMatcher.check("oey").should be_true
-    VowlerPairMatcher.check("booey").should be_true
-    VowlerPairMatcher.check("ZoEy").should be_true
-    VowlerPairMatcher.check("a e u").should be_false
-    VowlerPairMatcher.check("arg").should be_false
+    VowlePairMatcher.check("qwrtp").should be_false
+    VowlePairMatcher.check("qwer").should be_false
+    VowlePairMatcher.check("qweer").should be_true
+    VowlePairMatcher.check("qwe.rr").should be_false
+    VowlePairMatcher.check("aas").should be_true
+    VowlePairMatcher.check("the\ngray\nass").should be_false
+    VowlePairMatcher.check("zo\noey").should be_true
+    VowlePairMatcher.check("oey").should be_true
+    VowlePairMatcher.check("booey").should be_true
+    VowlePairMatcher.check("ZoEy").should be_true
+    VowlePairMatcher.check("a e u").should be_false
+    VowlePairMatcher.check("arg").should be_false
   end
 
 end
@@ -78,10 +93,10 @@ describe RepetitionMatcher do
   it "should extract the last repetition" do
     RepetitionMatcher.last("zooxyleem").should == "ee"
     RepetitionMatcher.last("iirsen\nbook;haas").should == "aa"
-    RepetitionMatcher.last("Iirsen book ha.as").should == "aa"
+    RepetitionMatcher.last("Iirsen book ha.as").should == "oo"
+    RepetitionMatcher.last("Iirse∞∞£nbok ha.as-t t").should == "∞∞"
     RepetitionMatcher.last("aAeEiI").should == "iI"
     RepetitionMatcher.last("aAe\nEiI").should == "iI"
     RepetitionMatcher.last("aAeEiIUU").should == "UU"
   end
 end
-=end
