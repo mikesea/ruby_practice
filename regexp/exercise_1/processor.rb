@@ -2,12 +2,12 @@
 class SingleCharacterMatcher
   
   def self.check char
-    /^.$/ =~ char
+    # /^.$/u =~ char
+    /^\s$|^.[^\s]?$/u =~ char
   end
 
   def self.contains? char, string
     /^[^#{char}]*#{char}[^#{char}]*$/ =~ string
-     # /(^#{char}[^#{char}]+$|^[^#{char}]#{char}{1}[^#{char}]$|^[^#{char}]#{char}{0}#{char}$)/ =~ string
   end
 
   def self.contains_only_this_character? char, string
@@ -22,7 +22,7 @@ end
 class CharacterSequenceMatcher
 
   def self.check chars
-    /(\S)(\1+)/ =~ chars
+    /(\S)(\1+)/u =~ chars
   end
 
 end
@@ -39,7 +39,7 @@ class RepetitionMatcher
   end
 
   def self.last string
-    string.gsub!(/(?:\\n)|[\W]/, "")
+    # string.gsub!(/(?:\\n)|[\W]/, "")
     matches = string.scan(/(\w)(\1+)/i)
     matches.last.join
   end

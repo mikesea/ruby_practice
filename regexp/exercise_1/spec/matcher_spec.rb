@@ -66,18 +66,18 @@ end
 describe VowlerPairMatcher do
 
   it "it should find two vowels following each other" do
-    VowlePairMatcher.check("qwrtp").should be_false
-    VowlePairMatcher.check("qwer").should be_false
-    VowlePairMatcher.check("qweer").should be_true
-    VowlePairMatcher.check("qwe.rr").should be_false
-    VowlePairMatcher.check("aas").should be_true
-    VowlePairMatcher.check("the\ngray\nass").should be_false
-    VowlePairMatcher.check("zo\noey").should be_true
-    VowlePairMatcher.check("oey").should be_true
-    VowlePairMatcher.check("booey").should be_true
-    VowlePairMatcher.check("ZoEy").should be_true
-    VowlePairMatcher.check("a e u").should be_false
-    VowlePairMatcher.check("arg").should be_false
+    VowlerPairMatcher.check("qwrtp").should be_false
+    VowlerPairMatcher.check("qwer").should be_false
+    VowlerPairMatcher.check("qweer").should be_true
+    VowlerPairMatcher.check("qwe.rr").should be_false
+    VowlerPairMatcher.check("aas").should be_true
+    VowlerPairMatcher.check("the\ngray\nass").should be_false
+    VowlerPairMatcher.check("zo\noey").should be_true
+    VowlerPairMatcher.check("oey").should be_true
+    VowlerPairMatcher.check("booey").should be_true
+    VowlerPairMatcher.check("ZoEy").should be_true
+    VowlerPairMatcher.check("a e u").should be_false
+    VowlerPairMatcher.check("arg").should be_false
   end
 
 end
